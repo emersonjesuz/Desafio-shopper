@@ -1,27 +1,31 @@
 export class ApiError extends Error {
-  public readonly statusCode: number;
+  public readonly code: number;
+  public readonly error_code: string;
+  public readonly error_description: string;
 
-  constructor(message: string, statusCode: number) {
-    super(message);
-    this.statusCode = statusCode;
+  constructor(error_description: string, code: number, error_code: string) {
+    super(error_description);
+    this.code = code;
     this.name = this.constructor.name;
+    this.error_code = error_code.toUpperCase();
+    this.error_description = error_description;
   }
 }
 
 export class ServerError extends ApiError {
-  constructor(message: string) {
-    super(message, 500);
+  constructor(error_description: string) {
+    super(error_description, 500, "SERVER_ERROR");
   }
 }
 
 export class NotFoundError extends ApiError {
-  constructor(message: string) {
-    super(message, 404);
+  constructor(error_description: string, error_code: string) {
+    super(error_description, 404, error_code);
   }
 }
 
 export class BadRequestError extends ApiError {
-  constructor(message: string) {
-    super(message, 400);
+  constructor(error_description: string, error_code: string) {
+    super(error_description, 400, error_code);
   }
 }
