@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:postgres@localhost:5434/postgres?schema=public"
+}
+
+model Drivers {
+  id                Int       @id @default(autoincrement())
+  name              String
+  description       String
+  vehicle           String
+  minimumKilometers Int
+  tax               Float
+  Reviews           Reviews[]
+  Rides             Rides[]
+}
+
+model Reviews {
+  id        Int     @id @default(autoincrement())
+  rating    Int
+  comment   String
+  driver_id Int
+  driver    Drivers @relation(fields: [driver_id], references: [id])
+}
+
+model Rides {
+  id          Int      @id @default(autoincrement())
+  customer_id String
+  date        DateTime
+  origin      String
+  destination String
+  distance    String
+  duration    String
+  driver_id   Int
+  drivers     Drivers  @relation(fields: [driver_id], references: [id])
+  value       String
+}
