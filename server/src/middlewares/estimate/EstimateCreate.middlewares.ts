@@ -1,13 +1,13 @@
-import { NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 import { EstimateCreateDto } from "../../dtos/EstimateCreate.dtos";
 import { BadRequestError } from "../../helpers/Api-error";
 
 export class EstimateCreateMiddlewares {
-  public static async execute(
+  public async execute(
     request: Request,
     response: Response,
     next: NextFunction
-  ) {
+  ): Promise<void> {
     const { customer_id, destination, origin } =
       request.body as unknown as EstimateCreateDto;
 
@@ -15,19 +15,19 @@ export class EstimateCreateMiddlewares {
 
     if (!customer_id)
       throw new BadRequestError(
-        "O id do usuário não pode estar em branco.",
+        "Os dados fornecidos no corpo da requisição são inválidos",
         statusMessage
       );
 
     if (!destination && !origin)
       throw new BadRequestError(
-        "O destino ou o origem podem estar em branco.",
+        "Os dados fornecidos no corpo da requisição são inválidos",
         statusMessage
       );
 
     if (destination === origin)
       throw new BadRequestError(
-        "Os endereços de origem e destino não podem ser o mesmo endereço.",
+        "Os dados fornecidos no corpo da requisição são inválidos",
         statusMessage
       );
 
