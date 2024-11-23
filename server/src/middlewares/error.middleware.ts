@@ -3,8 +3,9 @@ import { ApiError } from "../helpers/Api-error";
 
 export const errorMiddleware = async (
   err: Error & Partial<ApiError>,
-  _: Request,
-  res: Response
+  req: Request,
+  res: Response,
+  next: NextFunction
 ) => {
   const statusCode = err.code ?? 500;
   const statusMessage = err.error_code ?? "ERROR";
@@ -13,6 +14,7 @@ export const errorMiddleware = async (
     error_code: statusMessage,
     error_description: message,
   };
+  console.log(err);
 
   res.status(statusCode).json({ ...errorStructure });
 };
