@@ -12,6 +12,8 @@ export class GoogleApiRouterService implements ApiRouterService {
         address: destination,
       },
       travelMode: "DRIVE",
+      languageCode: "pt-BR",
+      units: "metric",
     };
 
     const { data } = await axios
@@ -33,6 +35,19 @@ export class GoogleApiRouterService implements ApiRouterService {
       );
     }
 
-    return data;
+    if (!data.routes[0].legs) {
+      throw new BadRequestError(
+        "Os dados fornecidos no corpo da requisição são inválidos",
+        "INVALID_DATA"
+      );
+    }
+
+    return {
+      origin: data.routes[0].legs[0].startLocation.latLng,
+      destination: data.routes[0].legs[0].endLocation.latLng,
+      distance: data.routes[0].legs[0].distanceMeters,
+      duration: data.routes[0].legs[0].duration,
+      routeResponse: data,
+    };
   }
 }
