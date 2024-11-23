@@ -30,6 +30,9 @@ export const drivers = (): Driver[] => {
     "Ford Ka",
   ];
 
+  const names = ["Dom Pedro", "João", "Maria", "Jorge", "Teresa"];
+  const lastName = ["Silva", "Santos", "Pereira", "Ferreira", "Costa"];
+
   const driver: Driver[] = [];
 
   for (let index = 0; index <= 20; index++) {
@@ -38,7 +41,9 @@ export const drivers = (): Driver[] => {
     const rating = Math.round(Math.random() * 4) + 1;
     driver.push({
       id: index + 1,
-      name: "Dom Pedro " + (index + 1),
+      name: ` ${names[Math.round(Math.random() * 4)]} ${
+        lastName[Math.round(Math.random() * 4)]
+      }`,
       description:
         "Ruin de curva, pode demorar um pouco para chegar ao destino",
       vehicle: vehicles[Math.round(Math.random() * 4)],
