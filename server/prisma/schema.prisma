@@ -39,9 +39,9 @@ model Rides {
   date        DateTime
   origin      String
   destination String
-  distance    String
+  distance    Int
   duration    String
   driver_id   Int
   drivers     Drivers  @relation(fields: [driver_id], references: [id])
-  value       String
+  value       Int
 }
