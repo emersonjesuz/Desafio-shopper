@@ -3,7 +3,7 @@ import { EstimateCreateResponseDTO } from "../dtos/EstimateCreateResponse.dtos";
 import { PrismaDriversRepositories } from "../repositories/drivers/PrismaDrivers.repositories";
 import { ApiRouterService } from "../services/apiRouter/ApiRouter.services";
 import { EstimateUseCases } from "../useCases/estimate/Estimate.useCases";
-import { DistanceFormatterKilometersMinute } from "../utils/distanceFormatter/DistanceFormatterkilometersMinute.utils";
+import { DistanceFormatterKilometersMinute } from "../utils/distanceFormatter/DistanceFormatterKilometersMinute.utils";
 import { TimeFormatterMinuteOrHours } from "../utils/timeFormatter.ts/TimeFormatterMinuteOrHours.utils";
 
 export class EstimateController {

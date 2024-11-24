@@ -10,7 +10,7 @@ import {
 } from "../../helpers/Api-error";
 import { DriversRepository } from "../../repositories/drivers/Drivers.repositories";
 import { RidesRepository } from "../../repositories/rides/Rides.repositories";
-import { DistanceFormatterKilometersMinute } from "../../utils/distanceFormatter/DistanceFormatterkilometersMinute.utils";
+import { DistanceFormatterKilometersMinute } from "../../utils/distanceFormatter/DistanceFormatterKilometersMinute.utils";
 
 export class RidesUseCases {
   constructor(

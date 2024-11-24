@@ -28,7 +28,7 @@ export const drivers = (): Driver[] => {
     const rating = Math.round(Math.random() * 4) + 1;
     driver.push({
       id: index + 1,
-      name: ` ${names[Math.round(Math.random() * 4)]} ${
+      name: `${names[Math.round(Math.random() * 4)]} ${
         lastName[Math.round(Math.random() * 4)]
       }`,
       description:

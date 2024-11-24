@@ -1,5 +1,5 @@
 import { expect, describe, it } from "vitest";
-import { DistanceFormatterKilometersMinute } from "./DistanceFormatterkilometersMinute.utils";
+import { DistanceFormatterKilometersMinute } from "./DistanceFormatterKilometersMinute.utils";
 
 describe("Distance formatter kilometers minute", () => {
   it("Should return correct formats", () => {
