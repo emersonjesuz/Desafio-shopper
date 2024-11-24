@@ -1,7 +1,7 @@
-import { VehicleRepository } from "../repositories/vehicle/Vehicle.repositories";
+import { DriversRepository } from "../repositories/drivers/Drivers.repositories";
 import { CalculateTotalValue } from "../utils/calculatePrice/CalculateTotalValue.utils";
 
-interface Driver {
+interface OutputDriver {
   id: number;
   name: string;
   description: string;
@@ -16,24 +16,24 @@ interface Review {
 }
 
 export class EstimateUseCases {
-  constructor(private readonly vehicleRepository: VehicleRepository) {}
+  constructor(private readonly driversRepository: DriversRepository) {}
 
   async list(
     kilometersMinute: number,
     ordemBy: "asc" | "desc"
-  ): Promise<Driver[]> {
+  ): Promise<OutputDriver[]> {
     const calculateTotalValue = new CalculateTotalValue();
-    const vehicles = await this.vehicleRepository.list(kilometersMinute);
-    const drivers: Driver[] = [];
+    const listDriversInDb = await this.driversRepository.list(kilometersMinute);
+    const drivers: OutputDriver[] = [];
 
-    vehicles.forEach((vehicle) =>
+    listDriversInDb.forEach((driver) =>
       drivers.push({
-        id: vehicle.id,
-        name: vehicle.name,
-        description: vehicle.description,
-        vehicle: vehicle.vehicle,
-        review: vehicle.review,
-        value: calculateTotalValue.execute(vehicle.tax, kilometersMinute),
+        id: driver.id,
+        name: driver.name,
+        description: driver.description,
+        vehicle: driver.vehicle,
+        review: driver.review,
+        value: calculateTotalValue.execute(driver.tax, kilometersMinute),
       })
     );
 
