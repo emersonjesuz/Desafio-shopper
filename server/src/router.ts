@@ -26,3 +26,10 @@ router.patch(
     await ridesController.save(request, response);
   }
 );
+
+router.get(
+  "/ride/:customer_id",
+  async (request: Request, response: Response) => {
+    await ridesController.list(request, response);
+  }
+);

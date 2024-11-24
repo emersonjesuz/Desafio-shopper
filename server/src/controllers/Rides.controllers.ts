@@ -31,4 +31,11 @@ export class RidesController {
 
     response.status(200).json({ success: save });
   }
+
+  async list(request: Request, response: Response): Promise<void> {
+    const { customer_id } = request.params;
+    const { driver_id } = request.query;
+    const rides = await this.ridesUseCases.list(customer_id, Number(driver_id));
+    response.status(200).json({ ...rides });
+  }
 }
