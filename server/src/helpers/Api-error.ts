@@ -23,6 +23,11 @@ export class NotFoundError extends ApiError {
     super(error_description, 404, error_code);
   }
 }
+export class NotAcceptableError extends ApiError {
+  constructor(error_description: string, error_code: string) {
+    super(error_description, 406, error_code);
+  }
+}
 
 export class BadRequestError extends ApiError {
   constructor(error_description: string, error_code: string) {
