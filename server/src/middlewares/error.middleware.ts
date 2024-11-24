@@ -14,7 +14,6 @@ export const errorMiddleware = async (
     error_code: statusMessage,
     error_description: message,
   };
-  console.log(err);
 
   res.status(statusCode).json({ ...errorStructure });
 };
