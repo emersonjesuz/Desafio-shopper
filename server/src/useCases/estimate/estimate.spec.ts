@@ -1,6 +1,6 @@
 import { expect, describe, it, beforeAll } from "vitest";
 import { EstimateUseCases } from "./Estimate.useCases";
-import { ImMemoryRepositories } from "../database/repositories/InMemory.repositories";
+import { ImMemoryRepositories } from "../../database/repositories/InMemory.repositories";
 
 describe("estimate create", () => {
   let estimateUseCases: EstimateUseCases;

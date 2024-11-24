@@ -1,5 +1,5 @@
-import { DriversRepository } from "../repositories/drivers/Drivers.repositories";
-import { CalculateTotalValue } from "../utils/calculatePrice/CalculateTotalValue.utils";
+import { DriversRepository } from "../../repositories/drivers/Drivers.repositories";
+import { CalculateTotalValue } from "../../utils/calculatePrice/CalculateTotalValue.utils";
 
 interface OutputDriver {
   id: number;
