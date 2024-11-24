@@ -8,4 +8,8 @@ export class ImMemoryRepositories implements DriversRepository {
       (driver) => driver.minimumKilometers <= kilometersMinute
     );
   }
+
+  async findById(id: number): Promise<Driver | null> {
+    return drivers().find((driver) => driver.id === id) || null;
+  }
 }
