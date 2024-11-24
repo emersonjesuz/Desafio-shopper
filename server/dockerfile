@@ -1,0 +1,18 @@
+FROM node:20.11.0
+
+WORKDIR /home/api
+
+COPY package.json ./
+COPY package-lock.json ./
+
+RUN npm install
+
+COPY prisma ./prisma
+
+COPY . .
+
+RUN npx prisma generate
+
+
+
+CMD sh -c "npm run migrate:deploy && npm run seed && npm run build && npm start"

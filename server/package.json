@@ -8,7 +8,11 @@
     "start": "node ./dist/main.js",
     "dev": "nodemon --exec ts-node ./src/main.ts",
     "build": "tsc",
-    "seed": "ts-node ./prisma/seed.ts"
+    "seed": "ts-node ./prisma/seed.ts",
+    "migrate:init": "prisma migrate dev --name init",
+    "migrate:deploy": "prisma migrate deploy",
+    "docker:up": "docker-compose up",
+    "docker:down": "docker-compose down"
   },
   "keywords": [],
   "author": "",

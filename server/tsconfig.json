@@ -1,17 +1,20 @@
 {
   "compilerOptions": {
-    "target": "ES2021",
-    "module": "commonjs",
-
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "outDir": "./dist",
-
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "target": "ES6", // Define a versão do ECMAScript para o código gerado
+    "module": "CommonJS", // Usado para compatibilidade com o Node.js
+    "lib": ["ES6"], // Inclui funcionalidades modernas do JavaScript
+    "strict": true, // Habilita verificações rigorosas de tipos
+    "esModuleInterop": true, // Permite a interoperabilidade com módulos CommonJS
+    "forceConsistentCasingInFileNames": true, // Garante consistência no uso de maiúsculas e minúsculas
+    "skipLibCheck": true, // Ignora verificações de tipo em arquivos de definição de biblioteca
+    "outDir": "./dist", // Diretório de saída dos arquivos compilados
+    "rootDir": "./src", // Diretório raiz dos arquivos fonte
+    "sourceMap": true, // Gera mapas de origem para depuração
+    "moduleResolution": "node", // Resolve módulos no estilo Node.js
+    "resolveJsonModule": true, // Permite importar arquivos JSON
+    "declaration": true, // Gera arquivos de definição de tipo (.d.ts)
+    "types": ["node"] // Inclui definições de tipos para Node.js
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"], // Inclui todos os arquivos TypeScript no diretório src
+  "exclude": ["node_modules", "**/*.test.ts"] // Exclui a pasta node_modules e arquivos de teste
 }
