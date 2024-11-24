@@ -16,7 +16,7 @@ describe("Ride create middlewares", () => {
     duration: "2 H",
     driver: {
       id: 1,
-      name: "Paulinho o ruin",
+      name: "Paulinho o ruim",
     },
     value: 100,
   };
