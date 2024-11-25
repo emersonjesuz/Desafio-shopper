@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 * {
-margin: 0;
-padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-
-html,body {
+html,
+body {
   color: black;
   background: white;
   font-family: Arial, Helvetica, sans-serif;
-
+  width: 100vw;
+  min-height: 100vh;
 }
