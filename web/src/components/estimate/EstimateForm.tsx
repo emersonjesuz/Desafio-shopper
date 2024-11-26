@@ -1,6 +1,12 @@
 "use client";
 import { CarJourneyDisplay } from "@/components/CarJourneyDisplay";
+import { estimateApi } from "@/services/estimateApi";
+import { useErrorStore } from "@/stores/useErrorStore";
+import { useEstimateStore } from "@/stores/useEstimateStore";
+import { useRidesStore } from "@/stores/useRidesStore";
+import { useRouterStore } from "@/stores/useRouterStore";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -17,6 +23,11 @@ const formSchema = z.object({
 });
 
 export function EstimateForm() {
+  const { setRouter } = useRouterStore((state) => state);
+  const { setEstimate } = useEstimateStore((state) => state);
+  const { setError } = useErrorStore((state) => state);
+  const { setRideData } = useRidesStore((state) => state);
+
   const {
     register,
     handleSubmit,
@@ -30,9 +41,28 @@ export function EstimateForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Form data:", values);
+  async function onSubmit({
+    customer_id,
+    destination,
+    origin,
+  }: z.infer<typeof formSchema>) {
+    try {
+      const { data } = await estimateApi(customer_id, origin, destination);
+      setEstimate(data);
+      setRideData({ customer_id, origin, destination });
+      setRouter("drivers");
+    } catch (error) {
+      let message =
+        "Estamos passando por problemas técnicos, por favor tente mas tarde!";
+      if (axios.isAxiosError(error)) {
+        message =
+          error.response?.data.error_description ??
+          error.response?.data.error_description;
+      }
+      setError({ message, show: true });
+    }
   }
+
   return (
     <form
       className="w-full space-y-4 p-5 lg:max-w-[600px]"
