@@ -1,73 +1,64 @@
 "use client";
-import { Icon, LatLngTuple } from "leaflet";
+import { icon, LatLngTuple, map, marker, polyline, tileLayer } from "leaflet";
 import "leaflet/dist/leaflet.css";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import {
-  MapContainer,
-  Marker,
-  Polyline,
-  Popup,
-  TileLayer,
-} from "react-leaflet";
+import { useEffect } from "react";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
+  origin: LatLngTuple;
+  destination: LatLngTuple;
+}
 
-export function MapContainerScreen({ ...props }: Props) {
-  const saoPaulo: LatLngTuple = [-23.55052, -46.633308];
-  const campinas: LatLngTuple = [-22.909938, -47.062633];
-  const route: LatLngTuple[] = [saoPaulo, campinas];
+export default function MapContainerScreen({
+  destination,
+  origin,
+  ...props
+}: Props) {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
 
-  return (
-    <MapContainer
-      center={[-23.0, -46.8]}
-      zoom={8}
-      scrollWheelZoom={false}
-      {...props}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    if (origin && destination) {
+      const leafletMap = map("map").setView([...origin], 10);
 
-      <Marker
-        position={saoPaulo}
-        icon={
-          new Icon({
-            iconUrl:
-              "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41],
-            shadowUrl:
-              "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-            html: `<div style="font-size: 24px; color: blue;">${FaMapMarkerAlt}</div>`,
-          })
-        }
-      >
-        <Popup>São Paulo</Popup>
-      </Marker>
+      tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(leafletMap);
 
-      <Marker
-        position={campinas}
-        icon={
-          new Icon({
-            iconUrl:
-              "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [1, -34],
-            shadowSize: [41, 41],
-            shadowUrl:
-              "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-            html: `<div style="font-size: 24px; color: blue;">${FaMapMarkerAlt}</div>`,
-          })
-        }
-      >
-        <Popup>Campinas</Popup>
-      </Marker>
+      const originIcon = icon({
+        iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+      });
 
-      <Polyline positions={route} color="blue" />
-    </MapContainer>
-  );
+      const destinationIcon = icon({
+        iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+      });
+
+      marker(origin, { icon: originIcon })
+        .addTo(leafletMap)
+        .bindPopup("Origem");
+
+      marker(destination, { icon: destinationIcon })
+        .addTo(leafletMap)
+        .bindPopup("Destino");
+
+      const route = polyline([origin, destination], {
+        color: "blue",
+        weight: 4,
+        opacity: 0.8,
+      }).addTo(leafletMap);
+
+      leafletMap.fitBounds(route.getBounds());
+
+      return () => {
+        leafletMap.remove();
+      };
+    }
+  }, [origin, destination]);
+
+  return <div id="map" {...props} />;
 }
