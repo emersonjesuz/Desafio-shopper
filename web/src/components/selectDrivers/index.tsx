@@ -1,9 +1,20 @@
-import { MapContainerScreen } from "@/components/MapContainerScreen";
+"use client";
 import { Suspense } from "react";
 import { DriverCard } from "./DriverCard";
 import { CarJourneyDisplay } from "../CarJourneyDisplay";
+import { useEstimateStore } from "@/stores/useEstimateStore";
+import dynamic from "next/dynamic";
+import { LatLngTuple } from "leaflet";
 
 export function SelectDriversScreen() {
+  const { estimate } = useEstimateStore((state) => state);
+  const MapContainerScreen = dynamic<{
+    origin: LatLngTuple;
+    destination: LatLngTuple;
+    className?: string;
+    style?: React.CSSProperties;
+  }>(() => import("../MapContainerScreen"), { ssr: false });
+
   return (
     <main className="w-full">
       <Suspense
@@ -14,6 +25,11 @@ export function SelectDriversScreen() {
         }
       >
         <MapContainerScreen
+          origin={[estimate.origin.latitude, estimate.origin.longitude]}
+          destination={[
+            estimate.destination.latitude,
+            estimate.destination.longitude,
+          ]}
           className="h-[200px] w-full rounded-t-2xl shadow-lg shadow-black/20 lg:h-[400px]"
           style={{ boxShadow: "0 -4px 6px -1px rgba(0, 0, 0, 0.3)" }}
         />
@@ -26,8 +42,8 @@ export function SelectDriversScreen() {
           <CarJourneyDisplay />
         </header>
         <section className="flex w-full max-w-[1100px] flex-col gap-1 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-5">
-          {[1, 2, 3, 4, 5, 6, 6, 1, 1, 1, 1, 1, 1, 1].map((item) => (
-            <DriverCard />
+          {estimate.options.map((driver) => (
+            <DriverCard key={driver.id} driver={driver} />
           ))}
         </section>
       </div>
