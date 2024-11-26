@@ -1,31 +1,34 @@
+import { formatterDateBR } from "@/helpers/formatterDateBR";
+import { formatterDistance } from "@/helpers/formatterDistance";
+import { formatterPrice } from "@/helpers/formatterPrice";
+import { Ride } from "@/stores/useRidesStore";
 import { FaCarSide } from "react-icons/fa";
 import { IoIosTime } from "react-icons/io";
-import { RiPinDistanceLine } from "react-icons/ri";
 
-export function RidesCard() {
+interface Props {
+  ride: Ride;
+}
+export function RidesCard({ ride }: Props) {
   return (
-    <article className="bg-zinc-10 flex h-[200px] flex-col justify-between gap-1 border-b border-gray-300 bg-zinc-200 px-2 py-2 shadow-sm shadow-black/10 lg:w-[500px] lg:justify-around">
-      <div className="flex flex-col rounded-md bg-zinc-100 px-2 py-1">
-        <div className="flex items-center gap-3">
-          <h1 className="font-bold capitalize">paulo souza</h1>
+    <article className="bg-zinc-10 sha flex h-[200px] flex-col justify-between gap-1 rounded-lg border-b border-gray-300 bg-[#f1f1f1] px-2 py-2 shadow-sm shadow-black/60 lg:w-[500px] lg:justify-around lg:px-5">
+      <div className="flex flex-col border-b border-b-zinc-700 px-2 py-1">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="font-bold capitalize">{ride.driver.name}</h1>
           <p className="text-[13px] text-zinc-600">
-            {new Date().toISOString()}
+            {formatterDateBR(ride.date)}
           </p>
         </div>
       </div>
       <div className="flex w-full flex-col items-end gap-2">
         <p className="w-full text-sm text-zinc-600">
           Saiu da{" "}
-          <span className="font-semibold text-zinc-800">
-            {" "}
-            Rua alto novo, centro, Macururé - Bahia{" "}
-          </span>
+          <span className="font-semibold text-zinc-800">{ride.origin}</span>
         </p>
         <p className="w-full text-sm text-zinc-600">
           Chegou em{" "}
           <span className="font-semibold text-zinc-800">
             {" "}
-            Av. Pedro segundo, 1222, centro, Macururé - Bahia{" "}
+            {ride.destination}
           </span>
         </p>
       </div>
@@ -33,14 +36,16 @@ export function RidesCard() {
       <div className="flex h-10 items-end justify-between">
         <div className="flex items-center gap-1">
           <FaCarSide />
-          <p className="text-zinc-600">5 Km </p>
+          <p className="text-zinc-600">{formatterDistance(ride.distance)}</p>
         </div>
         <div className="flex items-center gap-1">
           <IoIosTime />
-          <p className="text-zinc-600">10 Horas</p>
+          <p className="text-zinc-600">{ride.duration}</p>
         </div>
-        <div className="flex items-center justify-center rounded-md bg-zinc-100 px-3 py-1">
-          <p className="font-semibold text-zinc-600">R$ 1,0000</p>
+        <div className="flex items-center justify-center rounded-md bg-zinc-800 px-3 py-1">
+          <p className="font-semibold text-zinc-100">
+            {formatterPrice(ride.value)}
+          </p>
         </div>
       </div>
     </article>
