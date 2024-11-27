@@ -72,12 +72,16 @@ export function EstimateForm() {
         <input
           className="w-full rounded-lg border-2 border-gray-300 p-2 text-stone-600"
           id="customer_id"
+          data-cy="estimate-input-customer-id"
           placeholder="Insira seu ID#"
           {...register("customer_id")}
         />
 
         {errors.customer_id && (
-          <p className="w-full pl-2 text-sm text-red-400">
+          <p
+            data-cy="estimate-customer-id-error"
+            className="w-full pl-2 text-sm text-red-400"
+          >
             {errors.customer_id.message}
           </p>
         )}
@@ -86,11 +90,15 @@ export function EstimateForm() {
         <input
           className="w-full rounded-lg border-2 border-gray-300 p-2 text-stone-600"
           id="origin"
+          data-cy="estimate-input-origin"
           placeholder="Escolha seu ponto de partida"
           {...register("origin")}
         />
         {errors.origin && (
-          <p className="w-full pl-2 text-sm text-red-400">
+          <p
+            data-cy="estimate-origin-error"
+            className="w-full pl-2 text-sm text-red-400"
+          >
             {errors.origin.message}
           </p>
         )}
@@ -100,16 +108,23 @@ export function EstimateForm() {
         <input
           className="w-full rounded-lg border-2 border-gray-300 p-2 text-stone-600"
           id="origin"
+          data-cy="estimate-input-destination"
           placeholder="Informe o destino"
           {...register("destination")}
         />
         {errors.destination && (
-          <p className="w-full pl-2 text-sm text-red-400">
+          <p
+            data-cy="estimate-destination-error"
+            className="w-full pl-2 text-sm text-red-400"
+          >
             {errors.destination.message}
           </p>
         )}
       </div>
-      <button className="w-full rounded-lg bg-zinc-700 p-2 text-white lg:mt-10 lg:hover:bg-zinc-600">
+      <button
+        data-cy="estimate-button-confirm"
+        className="w-full rounded-lg bg-zinc-700 p-2 text-white lg:mt-10 lg:hover:bg-zinc-600"
+      >
         Confirmar
       </button>
     </form>

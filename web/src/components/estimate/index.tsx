@@ -6,6 +6,7 @@ export default function EstimateScreen() {
   return (
     <div className="flex w-[500px] flex-col items-center justify-center py-10 lg:min-h-[70vh]">
       <Image
+        data-cy={"estimate-image-car"}
         className="lg-h-auto h-[100px] w-1/2 object-cover lg:max-w-[400px]"
         src={carImage}
         alt="logo - image de um carro"
