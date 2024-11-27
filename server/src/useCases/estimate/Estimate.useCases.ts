@@ -32,7 +32,10 @@ export class EstimateUseCases {
         name: driver.name,
         description: driver.description,
         vehicle: driver.vehicle,
-        review: driver.review,
+        review: {
+          comment: driver.review.comment,
+          rating: driver.review.rating,
+        },
         value: calculateTotalValue.execute(driver.tax, kilometersMinute),
       })
     );
