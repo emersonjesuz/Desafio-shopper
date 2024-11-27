@@ -10,10 +10,15 @@ interface Props {
 }
 export function RidesCard({ ride }: Props) {
   return (
-    <article className="bg-zinc-10 sha flex h-[200px] flex-col justify-between gap-1 rounded-lg border-b border-gray-300 bg-[#f1f1f1] px-2 py-2 shadow-sm shadow-black/60 lg:w-[500px] lg:justify-around lg:px-5">
+    <article className="bg-zinc-10 flex h-[200px] w-full max-w-[500px] flex-col justify-between gap-1 rounded-lg border-b border-gray-300 bg-[#f1f1f1] px-2 py-2 shadow-sm shadow-black/60 lg:justify-around lg:px-5">
       <div className="flex flex-col border-b border-b-zinc-700 px-2 py-1">
         <div className="flex items-center justify-between gap-3">
-          <h1 className="font-bold capitalize">{ride.driver.name}</h1>
+          <h1
+            data-cy="historic-ride-card-driver-name"
+            className="font-bold capitalize"
+          >
+            {ride.driver.name}
+          </h1>
           <p className="text-[13px] text-zinc-600">
             {formatterDateBR(ride.date)}
           </p>
