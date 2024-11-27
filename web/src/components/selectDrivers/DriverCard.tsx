@@ -61,10 +61,15 @@ export function DriverCard({ driver }: Props) {
   }
 
   return (
-    <article className="bg-zinc-10 flex h-[100px] items-center justify-center gap-1 border-b border-gray-200 bg-zinc-100 px-2 py-2 shadow-sm shadow-black/10 lg:w-[500px] lg:justify-around">
-      <div className="flex flex-col">
+    <article className="bg-zinc-10 flex h-[100px] w-full max-w-[500px] items-center justify-between gap-1 border-b border-gray-200 bg-zinc-100 px-2 py-2 shadow-sm shadow-black/10 lg:w-[500px] lg:justify-between">
+      <div className="justify-and flex flex-col">
         <div className="flex items-center gap-3">
-          <h1 className="font-bold capitalize">{driver.name}</h1>
+          <h1
+            data-cy="select-driver-card-name"
+            className="font-bold capitalize"
+          >
+            {driver.name}
+          </h1>
 
           <div className="flex items-center gap-3">
             <div className="flex items-center">
@@ -85,14 +90,17 @@ export function DriverCard({ driver }: Props) {
           <FaCarAlt />
           <p className="text-[10px] font-semibold">{driver.vehicle}</p>
         </div>
-        <p className="text-[10px] lg:max-w-[300px]">{driver.description}</p>
+        <p className="max-w-[200px] text-[10px] lg:max-w-[300px]">
+          {driver.description}
+        </p>
       </div>
-      <div className="flex flex-col items-end">
+      <div className="flex flex-col items-end justify-end">
         <p className="font-semibold text-zinc-700">
           {formatterPrice(driver.value)}
         </p>
         <button
           type="button"
+          data-cy="select-driver-card-button"
           onClick={() => saveRides()}
           className="h-10 rounded-lg bg-zinc-900 px-3 text-[12px] text-white lg:w-[100px] lg:hover:bg-zinc-700"
         >

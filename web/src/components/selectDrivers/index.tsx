@@ -36,12 +36,15 @@ export function SelectDriversScreen() {
       </Suspense>
       <div className="lg:py10 flex w-full flex-col items-center gap-1 py-5 lg:justify-center lg:gap-10">
         <header className="mb-5 max-w-[400px]">
-          <h1 className="text-center text-2xl font-bold text-zinc-600 lg:text-3xl">
+          <h1
+            data-cy="select-drivers-title"
+            className="text-center text-2xl font-bold text-zinc-600 lg:text-3xl"
+          >
             Escolha quem vai guiar até seu destino!
           </h1>
           <CarJourneyDisplay />
         </header>
-        <section className="flex w-full max-w-[1100px] flex-col gap-1 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-5">
+        <section className="flex w-full max-w-[1100px] flex-col items-center justify-center gap-1 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between lg:gap-5">
           {estimate.options.map((driver) => (
             <DriverCard key={driver.id} driver={driver} />
           ))}
