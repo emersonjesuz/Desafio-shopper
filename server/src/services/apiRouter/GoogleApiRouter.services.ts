@@ -24,8 +24,11 @@ export class GoogleApiRouterService implements ApiRouterService {
           "X-Goog-FieldMask": "routes.legs",
         },
       })
-      .catch((error: AxiosError) => {
-        throw new ServerError(error.message);
+      .catch(() => {
+        throw new BadRequestError(
+          "Os dados fornecidos no corpo da requisição são inválidos",
+          "INVALID_DATA"
+        );
       });
 
     if (!data.routes) {
