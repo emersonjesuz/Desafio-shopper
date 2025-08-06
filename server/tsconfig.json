@@ -15,6 +15,6 @@
     "declaration": true, // Gera arquivos de definição de tipo (.d.ts)
     "types": ["node"] // Inclui definições de tipos para Node.js
   },
-  "include": ["src/**/*"], // Inclui todos os arquivos TypeScript no diretório src
+  "include": ["src/**/*", "test/time-formatter-minute-or-hours.spec.ts"], // Inclui todos os arquivos TypeScript no diretório src
   "exclude": ["node_modules", "**/*.test.ts"] // Exclui a pasta node_modules e arquivos de teste
 }

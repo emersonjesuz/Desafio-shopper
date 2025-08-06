@@ -1,5 +1,9 @@
-import { app } from "./app";
+import { ExpressHttpServer } from "./infra/http/express/ExpressHttpServer";
+import { EstimateControllerFactory } from "./interface/factory/EstimateController.factory";
+import { RidesControllerFactory } from "./interface/factory/RidesController.factory";
 
-app.listen(8080, () => {
-  console.log("Server is running on port 8080");
-});
+const httpServer = new ExpressHttpServer();
+EstimateControllerFactory.registerRoutes(httpServer);
+RidesControllerFactory.registerRoutes(httpServer);
+
+httpServer.listen(8080);

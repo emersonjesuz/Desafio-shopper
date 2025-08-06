@@ -15,13 +15,10 @@ describe("Estimation screen, error case", () => {
 
   it("Should be possible to see errors when clicking confirm, with empty fields", () => {
     cy.get("[data-cy=estimate-image-car]").should("be.visible");
-
     cy.get("[data-cy=estimate-input-customer-id]").should("be.visible");
     cy.get("[data-cy=estimate-input-origin]").should("be.visible");
     cy.get("[data-cy=estimate-input-destination]").should("be.visible");
-
     cy.get("[data-cy=estimate-button-confirm]").should("be.visible").click();
-
     cy.get("[data-cy=estimate-customer-id-error]").should("be.visible");
     cy.get("[data-cy=estimate-origin-error]").should("be.visible");
     cy.get("[data-cy=estimate-destination-error]").should("be.visible");
@@ -29,7 +26,6 @@ describe("Estimation screen, error case", () => {
 
   it("Should be possible to see an error screen if the fields are invalid", () => {
     cy.get("[data-cy=estimate-image-car]").should("be.visible");
-
     cy.get("[data-cy=estimate-input-customer-id]")
       .should("be.visible")
       .type("  ");
@@ -37,7 +33,6 @@ describe("Estimation screen, error case", () => {
     cy.get("[data-cy=estimate-input-destination]")
       .should("be.visible")
       .type(" ");
-
     cy.get("[data-cy=estimate-button-confirm]").should("be.visible").click();
 
     cy.get("[data-cy=error-message]").should("be.visible");
